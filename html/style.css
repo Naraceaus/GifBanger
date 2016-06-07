@@ -1,0 +1,102 @@
+#clickme {
+ height:25%;
+}
+body {
+ background-color:#000000;
+ color:#A20900;
+}
+.image-upload > input {
+    display: none;
+}
+.thumbnail {
+ padding:0px;
+ border:5px solid transparent;
+ background-color:#B8C3C4;
+ font-size:30px;
+}
+.thumbnail>img {
+ margin-left:0;
+ margin-right:0;
+ width:100%;
+}
+.selected {
+ padding:0px;
+ border:5px solid #A20900;
+
+}
+.mainImage {
+ max-width:100%;
+}
+.expander {
+ color:#F5CB5C;
+}
+.expander:before{
+ content:"\e113";
+}
+.expander.collapsed:before{
+ content:"\e114";
+}
+.collapse.in.frameButton{
+ display:inline;
+}
+#mockGifImage{
+ max-width:100%;
+}
+.row{
+ margin-left:0px;
+ margin-right:0px;
+}
+.glyphIcon{
+ transition:transform .25s ease-in;
+ animation-name:shake;
+ animation-duration:.5s;
+ animation-iteration-count: 3;
+ animation-direction:alternate;
+}
+
+@keyframes glyphWiggle {
+ 0% {transform:rotate(0deg);}
+ 20% {transform:rotate(10deg);}
+ 40% {transform:rotate(-10deg);}
+ 60% {transform:rotate(10deg);}
+ 80% {transform:rotate(-10deg);}
+ 100% {transform:rotate(0deg);}
+}
+
+.glyphIcon:hover{
+ animation-name:glyphWiggle;
+ animation-duration:250ms;
+ animation-iteration-count:1;
+ cursor:pointer;
+}
+
+.btn-xlarge {
+ padding: 18px 28px;
+ font-size: 27px;
+ line-height: normal;
+ -webkit-border-radius: 8px;
+ -moz-border-radius: 8px;
+ border-radius: 8px;
+ background-color:#B8C3C4;
+ text-align:center;
+}
+.btn-xlarge:hover {
+ cursor:pointer;
+}
+#metronomeHolder{
+ height:25%;
+}
+.progress-bar{
+-o-transition-property: none !important;
+
+ -moz-transition-property: none !important;
+
+ -ms-transition-property: none !important;
+
+ -webkit-transition-property: none !important;
+
+ transition-property: none !important;
+}
+.nopadding {
+ padding:0;
+}
