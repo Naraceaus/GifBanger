@@ -82,7 +82,7 @@ if ($uploadOk == 0) {
          $origFile="uploads/".session_id()."_origUpload.gif";
          if (file_exists($origFile)) {
          } else {
-          $origFile = "uploads/default.gif";
+          $origFile = "default.gif";
          }
            echo "<image class='mainImage' src='$origFile'>";
          ?>
