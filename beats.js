@@ -13,6 +13,7 @@
     this.accBarSel = accBarSel;
     this.slideSel=slideSel;
     this.mockGifSel = mockGifSel;
+    this.shareSel = "shareLink";
     
     //max siz of beats array
     this.maxBeats = 4;
@@ -75,6 +76,8 @@
       that.showCurrentFrame();
       
       that.setMetronome(bpmNow);
+      
+      that.generateShareLink();
      }
      
      // update beat accuracy bar
@@ -136,6 +139,8 @@
      var frameNumber = $("#"+slideID).data("count");
      
      that.setOomphFrame(frameNumber);
+     
+     that.generateShareLink();
     }
     
     //set the oomph beat frame takesan event from click
@@ -206,6 +211,8 @@
      
      that.addFrame(frameNum);
      
+     that.generateShareLink();
+     
      $("#removeFrame"+frameNum).show();
      $("#"+addFrameID).hide();
     }
@@ -228,6 +235,8 @@
      var frameNum = $("#"+removeFrameID).data("count");
      
      that.removeFrame(frameNum);
+     
+     that.generateShareLink();
      
      if ($.inArray(frameNum,that.oomphFrames)!=-1) {
       that.setOomphFrame(frameNum);
@@ -334,6 +343,18 @@
      } else {
       this.timerActive = false;
      }
+    }
+    
+    this.generateShareLink = function() {
+     var shareDomain = window.location.host;
+     var shareUImgID = that.UImgID;
+     var shareOomphBeat = that.oomphFrames.toString();
+     var shareFrames = that.frames.toString();
+     var shareBPMs = that.bpMs;
+     
+     $shareURL = shareDomain + "?UImgID=" + shareUImgID + "&oomphBeat=" + shareOomphBeat + "&frames=" + shareFrames + "&bpMs=" + shareBPMs;
+     
+     $("#"+that.shareSel).val($shareURL);
     }
     
     $("#"+that.tapSel).on("mousedown",that.addBeat);

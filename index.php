@@ -210,7 +210,7 @@ if ($uploadOk == 0) {
     <div><h1><span class="expander clickGlyph glyphicon collapsed" data-toggle="collapse" data-target="#shareMe"></span>Step 4. Share with your friends</h1></div>
     <div id="shareMe" class="row collapse">
      <div class="col-md-12">
-     Share Link: <?php echo "$_SERVER[HTTP_HOST]?UImgID=$UImgID"; ?>
+     Share Link: <input id="shareLink" type="text" value="<?php echo "$_SERVER[HTTP_HOST]?UImgID=$UImgID"; ?>"/>
      </div>
     </div>
    </div>
