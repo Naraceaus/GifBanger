@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 // also used to ensure unique future image upload names 
 $imageTimestamp = time();
 
-//time page was loaded before hitting submit
+//time page was loaded before hitting submit to upload an image
 if(isset($_POST['loadTimeStamp'])) {
  $prevImgTimeStamp = $_POST['loadTimeStamp'];
 } else {
@@ -19,6 +19,13 @@ if(isset($_POST['loadTimeStamp'])) {
 }
 // unique timestamp plus session id combo used to make image names
 $UImgID = session_id()."-".$prevImgTimeStamp;
+
+//time page was loaded before hitting submit to upload an image
+if(isset($_GET['UImgID'])) {
+ $UImgID = $_GET['UImgID'];
+} else {
+ $UImgID= session_id()."-".$prevImgTimeStamp;;
+}
 
 include "GifFrameExtractor.php";
 
@@ -196,6 +203,19 @@ if ($uploadOk == 0) {
     </div>
    </div>
   </div>
+  
+  <!--Share Link-->
+  <div class="row">
+   <div class="col-md-12">
+    <div><h1><span class="expander clickGlyph glyphicon collapsed" data-toggle="collapse" data-target="#shareMe"></span>Step 4. Share with your friends</h1></div>
+    <div id="shareMe" class="row collapse">
+     <div class="col-md-12">
+     Share Link: <?php echo "$_SERVER[HTTP_HOST]?UImgID=$UImgID"; ?>
+     </div>
+    </div>
+   </div>
+  </div>
+
   
  </div>
  <hr>
