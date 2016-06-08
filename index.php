@@ -84,7 +84,7 @@ if ($uploadOk == 0) {
          } else {
           $origFile = "default.gif";
          }
-           echo "<image class='mainImage' src='$origFile'>";
+           echo "<image class='mainImage inputImage' src='$origFile'>";
          ?>
          </label>
          <input id="fileToUpload" name="fileToUpload" type="file"/>

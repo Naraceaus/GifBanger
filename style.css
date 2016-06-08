@@ -27,6 +27,10 @@ body {
 .mainImage {
  max-width:100%;
 }
+.inputImage {
+ pointer-events:none;
+}
+
 .expander {
  color:#F5CB5C;
 }
