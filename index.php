@@ -7,6 +7,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// used to force browser not cache images      
+$imageTimestamp = time();
+
 include "GifFrameExtractor.php";
 
 if (!empty($_FILES["fileToUpload"]["name"])) {
@@ -84,7 +87,7 @@ if ($uploadOk == 0) {
          } else {
           $origFile = "default.gif";
          }
-           echo "<image class='mainImage inputImage' src='$origFile'>";
+           echo "<image class='mainImage inputImage' src='$origFile?$imageTimestamp'>";
          ?>
          </label>
          <input id="fileToUpload" name="fileToUpload" type="file"/>
@@ -106,8 +109,6 @@ if ($uploadOk == 0) {
       $gfe->extract($origFile);
 
       $count=1;
-      
-      $imageTimestamp = time();
       
       foreach ($gfe->getFrames() as $frame) {
        // The frame resource image var
