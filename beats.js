@@ -34,8 +34,8 @@
     //selectr for beat timer bar
     this.beatTimerSel = "beatTimer";
     
-    //session id stored in page hidden input for image selection
-    this.sessionID = $('#sessionID').val();
+    //Unique image identifier to pull right image when playing
+    this.UImgID = $('#UImgID').val();
     
     //oomphFrame is the frames of the split gif where the beat should land on
     this.oomphFrames=[];
@@ -194,7 +194,7 @@
        var frameToShow = that.frames[(($.inArray(wholeOomph,that.frames) + oomphFrameProgression) % that.frames.length)];
       }
       
-      $("#"+that.mockGifSel).attr("src","uploads/"+that.sessionID+"_"+frameToShow+".jpeg");
+      $("#"+that.mockGifSel).attr("src","uploads/"+that.UImgID+"_"+frameToShow+".jpeg");
       
       setTimeout(function() {that.showCurrentFrame();},10);
      }
@@ -323,9 +323,7 @@
      that.timerActive = true;
      if (that.beats.length > 1) {
       var beatPercentage = 100- ((Date.now() - that.beats[that.beats.length-1])/(that.beats[1]-that.beats[0]))*100;
-      console.log(beatPercentage);
-      console.log(Date.now() - that.beats[that.beats.length-1], that.beats[1]-that.beats[0]);
-      
+     
       if (0<beatPercentage) {
        $("#"+that.beatTimerSel).css("width",beatPercentage+"%");
        setTimeout(function () {that.updateBeatTimer()},50);

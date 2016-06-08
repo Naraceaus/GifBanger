@@ -7,15 +7,25 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// used to force browser not cache images      
+// used to force browser not cache images
+// also used to ensure unique future image upload names 
 $imageTimestamp = time();
+
+//time page was loaded before hitting submit
+if(isset($_POST['loadTimeStamp'])) {
+ $prevImgTimeStamp = $_POST['loadTimeStamp'];
+} else {
+ $prevImgTimeStamp="";
+}
+// unique timestamp plus session id combo used to make image names
+$UImgID = session_id()."-".$prevImgTimeStamp;
 
 include "GifFrameExtractor.php";
 
 if (!empty($_FILES["fileToUpload"]["name"])) {
 $imageFileType = pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION);
 $target_dir = "uploads/";
-$target_file = $target_dir . session_id() ."_origUpload.".$imageFileType;
+$target_file = $target_dir . $UImgID . "_origUpload.".$imageFileType;
 $uploadOk = 1;
 //echo "this is my file type" . $imageFileType;
 // Check if image file is a actual image or fake image
@@ -67,7 +77,7 @@ if ($uploadOk == 0) {
 
   </head>
  <body>
-  <?php echo "<input id='sessionID' type='hidden' value='".session_id()."'/>" ?>
+  <?php echo "<input id='UImgID' type='hidden' value='".$UImgID."'/>" ?>
   
   <div class="container">
   
@@ -78,11 +88,14 @@ if ($uploadOk == 0) {
       <div id="imgUpload" class="collapse in">
       <h3>Click on the below image to upload a new gif</h3>
        <form id="imageform" action="index.php" method="post" enctype="multipart/form-data">
+        
+        <input id="loadTimeStamp" name="loadTimeStamp" type="hidden" value="<?php echo time()?>"/>
+        
         <div class="image-upload">
          <label for="fileToUpload">
          <?php  
          $sessionID=session_id();
-         $origFile="uploads/".session_id()."_origUpload.gif";
+         $origFile="uploads/".$UImgID."_origUpload.gif";
          if (file_exists($origFile)) {
          } else {
           $origFile = "default.gif";
@@ -115,7 +128,7 @@ if ($uploadOk == 0) {
        $img = $frame['image'];
        $duration = $frame['duration'];
 
-       $imgname = "uploads/" . session_id() . "_" . $count . ".jpeg";
+       $imgname = "uploads/" .$UImgID . "_" . $count . ".jpeg";
        
        imagejpeg($img, $imgname);
        
