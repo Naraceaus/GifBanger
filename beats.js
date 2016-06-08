@@ -201,11 +201,6 @@
       
       $("#"+that.mockGifSel).attr("src","uploads/"+that.UImgID+"_"+frameToShow+".jpeg");
       
-      if (frameToShow == null) {
-       console.log(that.oomphFrames,":", oomphIndex);
-       console.log((($.inArray(wholeOomph,that.frames) + oomphFrameProgression) % that.frames.length));
-  
-      }
       setTimeout(function() {that.showCurrentFrame();},10);
      }
     }
