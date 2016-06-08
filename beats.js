@@ -16,7 +16,7 @@
     this.shareSel = "shareLink";
     
     //max siz of beats array
-    this.maxBeats = 4;
+    this.maxBeats = 20;
     // timestamp of each beat
     this.beats = [];
     //contains BPM of lessening accuracy
@@ -167,7 +167,7 @@
     this.showCurrentFrame = function() {
      if (that.beats.length > 1 && that.oomphFrames.length>0) {
       var curTime = Date.now();
-      var timeElapsed = curTime - that.beats[that.beats.length-1];
+      var timeElapsed = curTime - that.beats[0];
       
       var noBeats = timeElapsed * that.bpMs;
       var noWholeBeats = Math.floor(noBeats);
@@ -177,7 +177,7 @@
       var oomphIndex = 0;
       var framToShow = 0;
       if (that.oomphFrames.length > 0) {
-       var oomphIndex = (noWholeBeats-1) % that.oomphFrames.length;
+       var oomphIndex = (noWholeBeats) % that.oomphFrames.length;
        
        var nextOomphIndex = (oomphIndex+1) % that.oomphFrames.length;
        
@@ -201,6 +201,11 @@
       
       $("#"+that.mockGifSel).attr("src","uploads/"+that.UImgID+"_"+frameToShow+".jpeg");
       
+      if (frameToShow == null) {
+       console.log(that.oomphFrames,":", oomphIndex);
+       console.log((($.inArray(wholeOomph,that.frames) + oomphFrameProgression) % that.frames.length));
+  
+      }
       setTimeout(function() {that.showCurrentFrame();},10);
      }
     }
