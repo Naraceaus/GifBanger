@@ -107,6 +107,8 @@ if ($uploadOk == 0) {
 
       $count=1;
       
+      $imageTimestamp = time();
+      
       foreach ($gfe->getFrames() as $frame) {
        // The frame resource image var
        $img = $frame['image'];
@@ -119,7 +121,7 @@ if ($uploadOk == 0) {
        echo "
        <div class='col-lg-2 col-md-4 col-sm-6'>
         <div class='thumbnail slide'>
-         <img src='$imgname'>
+         <img src='$imgname?$imageTimestamp'>
          <span id='addFrame$count' class='addFrame clickGlyph glyphicon glyphicon-plus' data-count='$count' style='display:none;'></span>
          <span id ='removeFrame$count' class='removeFrame clickGlyph glyphicon glyphicon-minus' data-count='$count'></span>
          <span id='slide$count' class='toggleOomph	clickGlyph glyphicon glyphicon-music' data-count='$count'></span>
