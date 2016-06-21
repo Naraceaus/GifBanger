@@ -37,7 +37,10 @@
     
     //Unique image identifier to pull right image when playing
     this.UImgID = $('#UImgID').val();
-    
+				
+				//timestamp of page load to prevent caching images from previous submission
+    this.UImgTS = $('#UImgTS').val();
+				
     //oomphFrame is the frames of the split gif where the beat should land on
     this.oomphFrames=[];
     this.oomphGaps=[];
@@ -199,7 +202,7 @@
        var frameToShow = that.frames[(($.inArray(wholeOomph,that.frames) + oomphFrameProgression) % that.frames.length)];
       }
       
-      $("#"+that.mockGifSel).attr("src","uploads/"+that.UImgID+"_"+frameToShow+".jpeg");
+      $("#"+that.mockGifSel).attr("src","uploads/"+that.UImgID+"_"+frameToShow+".jpeg?"+that.UImgTS);
       
       setTimeout(function() {that.showCurrentFrame();},10);
      }

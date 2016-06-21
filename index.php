@@ -85,6 +85,7 @@ if ($uploadOk == 0) {
   </head>
  <body>
   <?php echo "<input id='UImgID' type='hidden' value='".$UImgID."'/>" ?>
+  <?php echo "<input id='UImgTS' type='hidden' value='".$imageTimestamp."'/>" ?>
   
   <div class="container">
   
