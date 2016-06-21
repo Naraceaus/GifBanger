@@ -86,8 +86,8 @@
       $("#maxBPM").text(that.maxBPM);
       
      //start the beat time if not already running, if already running reset
-     if (!that.timerActive && that.beats.length > 1) {
-      that.updateBeatTimer();
+     if (that.beats.length > 1) {
+						that.restartBeatTimer();
      }
      
     }
@@ -327,23 +327,20 @@
      $("#metG").css("transform", "rotate("+rotateDegrees+"deg)");
     }
     
-    this.updateBeatTimer = function() {
-     
-     that.timerActive = true;
-     if (that.beats.length > 1) {
-      var beatPercentage = 100- ((Date.now() - that.beats[that.beats.length-1])/(that.beats[1]-that.beats[0]))*100;
-     
-      if (0<beatPercentage) {
-       $("#"+that.beatTimerSel).css("width",beatPercentage+"%");
-       setTimeout(function () {that.updateBeatTimer()},50);
-      } else {
-       that.timerActive = false;
-       $("#"+that.beatTimerSel).css("width","0");
-      }
-     } else {
-      this.timerActive = false;
-     }
-    }
+				this.restartBeatTimer = function() {
+					if (that.beats.length > 1) {
+						var countDownTime = that.beats[that.beats.length-1]-that.beats[that.beats.length-2];
+						$("#"+that.beatTimerSel).finish();
+						$("#"+that.beatTimerSel).width("100%");
+						$("#"+that.beatTimerSel).animate({width: "0px"},countDownTime);
+					 that.timerActive = true;
+						setTimeout(function () {that.stopTimer()},countDownTime);
+					}					
+				}
+				
+				this.stopTimer = function() {
+					that.timerActive  = false;
+				}
     
     this.generateShareLink = function() {
      var shareDomain = window.location.host;
